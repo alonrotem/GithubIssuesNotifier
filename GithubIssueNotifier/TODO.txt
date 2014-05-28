@@ -1,0 +1,8 @@
+﻿Pending features / bugs
+- Pending feature: Show an "all clear" message/image
+- Pending feature: Balooon notifications
+- Pending feature: Email notifications
+- Pending feature: Automatically open the config on startup, if no settings are stored. 
+				   When saved scan should be automatically performed.
+- Pending feature: Autostart with Windows
+- Bug: items are not sorted correctly when all tracking options are on at once
