@@ -175,7 +175,7 @@ namespace GithubIssueNotifier.Utils
             string intervalStr = ConfigWrapper.GetValue(Constants.ConfigKey_TrackingInterval, "30");
             if(!int.TryParse(intervalStr, out intervalInt))
                 intervalInt = 30;
-            string intervalType = ConfigWrapper.GetValue(Constants.ConfigKey_TrackingIntervalType).ToLower().Trim();
+            string intervalType = ConfigWrapper.GetValue(Constants.ConfigKey_TrackingIntervalType, "minutes").ToLower().Trim();
             if (intervalType == "hours")
                 intervalFactor = 60 * 60;
             return intervalInt * intervalFactor * 1000;
