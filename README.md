@@ -43,4 +43,13 @@ On the third tab, **Notification settings**, you can configure the settings for 
 ![Setup wizard > Notification settings](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Settings_Nofitications.png)
 
 Once you are done, click **Save** to save all your settings and close the dialog.
+##Working with GitHub Issues Notifier**
+###System tray notifications###
+Once your settings are saved and GitHub Issues Notifier is active, an icon will appear in your system's notification area (system tray) with a tooltip indicating its current status.   
+![Scanning...](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_Scanning.png)
 
+If baloon notifications are active, when scanning is complete with new results, a notification baloon will appear.
+![Baloon notifications](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_Baloon.png)
+
+The notification icon will now also show the total number of open issues
+![Open issues count](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_Results.png)
