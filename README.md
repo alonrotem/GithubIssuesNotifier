@@ -2,7 +2,11 @@
 ##Overview
 GitHub Issues Notifier is a .NET Windows Forms application keeps track on GitHub open issues on selected repositories and reports in real time.
  It runs in the system's notification area (system tray), runs automatic scheduled scans for open issues in GitHub repositories and/or organizations and notifies the user with new findings.   
+ GitHub Issues Notifier is using [OctoKit.NET](https://github.com/octokit/octokit.net) in order to integrate with GitHub's API.
+
 ![About GitHub Issues Notifier](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/AboutDialog.png)
+##Getting the Solution and Building it
+GitHub Issue Notifier's solution references [OctoKit.NET](https://github.com/octokit/octokit.net)'s [Nuget package](http://www.nuget.org/packages/Octokit/). Once the solution is built, OctoKit's package is automatically retrieved and restored as a reference to the Windows Forms project.
 ##Initial Configuration
 When opened for the first time, the setup wizard, which contains 3 tabs will open.
 
