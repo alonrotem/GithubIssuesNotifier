@@ -6,8 +6,8 @@ GitHub Issues Notifier is a .NET Windows Forms application keeps track on GitHub
 ##Initial Configuration
 When opened for the first time, the setup wizard, which contains 3 tabs will appear.
 
- On the first tab, **GitHub Settings**, fill in your GitHub credentials in the respectivce *Username* and *Password* fields and click **Save credentials and go to select repositories >** to continue. 
+ On the first tab, **GitHub Settings**, fill in your GitHub credentials in the respectivce *Username* and *Password* fields and click **Save credentials and go to select repositories >** to continue.   
 ![Setup wizard > GitHub Settings](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Settings_GithubSettings.png)
  
-On the second tab, **Track / Untrack Repositories**, you are presented with 3 group boxes 
+On the second tab, **Track / Untrack Repositories**, you are presented with 3 group boxes   
 ![Setup wizard > Untrack Repositories](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Settings_Track_Untrack.png)
