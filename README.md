@@ -43,8 +43,8 @@ On the third tab, **Notification settings**, you can configure the settings for 
 ![Setup wizard > Notification settings](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Settings_Nofitications.png)
 
 Once you are done, click **Save** to save all your settings and close the dialog.
-##Working with GitHub Issues Notifier**
-###System tray notifications###
+##Working with GitHub Issues Notifier
+###System tray notifications
 Once your settings are saved and GitHub Issues Notifier is active, an icon will appear in your system's notification area (system tray) with a tooltip indicating its current status.   
 ![Scanning...](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_Scanning.png)
 
@@ -53,3 +53,25 @@ If baloon notifications are active, when scanning is complete with new results, 
 
 The notification icon will now also show the total number of open issues
 ![Open issues count](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_Results.png)
+
+Right-click the notification icon to open a menu of immediate actions.
+![Menu](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_Menu.png)
+
+Left-click  the notification icon to open the notifications window
+###The notifications window
+The notifications window lists all the tracked repositories marking the ones with open issues and highlighting the ones which contain late issues according to the SLA set in the options.   
+![](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/NotifierWin_Results.png)
+
+While scanning, an animation is displayed in the notifications window.
+![](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/NotifierWin_Scanning.png)
+
+If the scan ends with no results at all (no repositories and no issues) which can indicate, for example, a network problem or a GitHub credentials issue, an error message is displayed.
+![](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/NotifierWin_NoResults.png)
+
+In order to refresh the repositories on demand at any time, there are 2 options:
+
+ - In the notificaitons window's menu, under **Tools** click **Refresh now**.   
+ ![](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/NotifierWin_Menu.png)
+
+ - Click the *Refresh* button at the bottom of the notifications window.   
+ ![](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/NotifierWin_RefreshButton.png)
