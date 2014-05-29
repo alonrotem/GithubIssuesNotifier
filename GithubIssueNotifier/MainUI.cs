@@ -19,6 +19,7 @@ namespace GithubIssueNotifier
             this.StartInTray();
             this.notifyIcon.Text = "GitHub Issues Notifier";
             this.notifyIcon.Click += notifyIcon_Click;
+            this.openNotificaitionsWindowToolStripMenuItem.Click += openNotificaitionsWindowToolStripMenuItem_Click;
             this.refreshToolStripMenuItem.Click += refreshToolStripMenuItem_Click;
             this.optionsToolStripMenuItem.Click += optionsToolStripMenuItem_Click;
             this.exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
@@ -46,6 +47,11 @@ namespace GithubIssueNotifier
         }
 
         #region Menu actions
+
+        private void openNotificaitionsWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.openNotificationsWindow();
+        }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -108,24 +114,30 @@ namespace GithubIssueNotifier
 
         private void notifyIcon_Click(object sender, EventArgs e)
         {
+            if (((MouseEventArgs)e).Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                this.openNotificationsWindow();
+            }
+        }
+
+        private void openNotificationsWindow()
+        {
             if (this.isActiveWindow)
             {
                 this.notificationsWindow.BringToFront();
             }
             else
             {
-                if (((MouseEventArgs)e).Button == System.Windows.Forms.MouseButtons.Left)
-                {
-                    //Point p = Control.MousePosition;
 
-                    this.notificationsWindow = new NotificationsWindow() { StartPosition = FormStartPosition.Manual };
-                    this.notificationsWindow.Show();
-                    int x = Screen.PrimaryScreen.WorkingArea.Width - this.notificationsWindow.Width;
-                    int y = Screen.PrimaryScreen.WorkingArea.Height - this.notificationsWindow.Height;
-                    this.notificationsWindow.Bounds = new Rectangle(x, y, this.notificationsWindow.Width, this.notificationsWindow.Height);
-                    this.notificationsWindow.FormClosed += this.notificationsWindow_FormClosed;
-                    this.isActiveWindow = true;
-                }
+                //Point p = Control.MousePosition;
+
+                this.notificationsWindow = new NotificationsWindow() { StartPosition = FormStartPosition.Manual };
+                this.notificationsWindow.Show();
+                int x = Screen.PrimaryScreen.WorkingArea.Width - this.notificationsWindow.Width;
+                int y = Screen.PrimaryScreen.WorkingArea.Height - this.notificationsWindow.Height;
+                this.notificationsWindow.Bounds = new Rectangle(x, y, this.notificationsWindow.Width, this.notificationsWindow.Height);
+                this.notificationsWindow.FormClosed += this.notificationsWindow_FormClosed;
+                this.isActiveWindow = true;
             }
         }
 
