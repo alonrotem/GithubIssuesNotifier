@@ -3,3 +3,4 @@ GithubIssueNotifier/bin/
 GithubIssueNotifier/obj/
 packages/
 .nuget/NuGet.exe
+thumbs.db
