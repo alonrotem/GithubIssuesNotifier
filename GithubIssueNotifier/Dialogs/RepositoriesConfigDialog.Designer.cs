@@ -49,6 +49,9 @@
             this.txtNewOrganization = new System.Windows.Forms.TextBox();
             this.lstTrackedOrganizations = new System.Windows.Forms.ListBox();
             this.grpIncludedRepositories = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtNewRepositoryOwner = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnRemoveRepositories = new System.Windows.Forms.Button();
             this.btnAddRepository = new System.Windows.Forms.Button();
@@ -76,14 +79,13 @@
             this.lstIntervalType = new System.Windows.Forms.ComboBox();
             this.txtIntervalNum = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.chkStartWithWindows = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnWizardNext = new System.Windows.Forms.Button();
             this.btnWizardBack = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.txtNewRepositoryOwner = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.chkShowBaloons = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabTrackRepos.SuspendLayout();
             this.tabGitHubSettings.SuspendLayout();
@@ -279,23 +281,25 @@
             // 
             // btnRemoveOrganizations
             // 
+            this.btnRemoveOrganizations.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnRemoveOrganizations.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemoveOrganizations.Location = new System.Drawing.Point(278, 117);
             this.btnRemoveOrganizations.Name = "btnRemoveOrganizations";
             this.btnRemoveOrganizations.Size = new System.Drawing.Size(75, 23);
             this.btnRemoveOrganizations.TabIndex = 5;
             this.btnRemoveOrganizations.Text = "< Remove";
-            this.btnRemoveOrganizations.UseVisualStyleBackColor = true;
+            this.btnRemoveOrganizations.UseVisualStyleBackColor = false;
             // 
             // btnAddOrganization
             // 
+            this.btnAddOrganization.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnAddOrganization.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddOrganization.Location = new System.Drawing.Point(278, 69);
             this.btnAddOrganization.Name = "btnAddOrganization";
             this.btnAddOrganization.Size = new System.Drawing.Size(75, 23);
             this.btnAddOrganization.TabIndex = 4;
             this.btnAddOrganization.Text = "Add >";
-            this.btnAddOrganization.UseVisualStyleBackColor = true;
+            this.btnAddOrganization.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -355,6 +359,31 @@
             this.grpIncludedRepositories.TabStop = false;
             this.grpIncludedRepositories.Text = "Tracked individual repositories";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 67);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(41, 13);
+            this.label12.TabIndex = 16;
+            this.label12.Text = "Owner:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 92);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(60, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "Repository:";
+            // 
+            // txtNewRepositoryOwner
+            // 
+            this.txtNewRepositoryOwner.Location = new System.Drawing.Point(72, 64);
+            this.txtNewRepositoryOwner.Name = "txtNewRepositoryOwner";
+            this.txtNewRepositoryOwner.Size = new System.Drawing.Size(196, 20);
+            this.txtNewRepositoryOwner.TabIndex = 14;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -366,23 +395,25 @@
             // 
             // btnRemoveRepositories
             // 
+            this.btnRemoveRepositories.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnRemoveRepositories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemoveRepositories.Location = new System.Drawing.Point(278, 115);
             this.btnRemoveRepositories.Name = "btnRemoveRepositories";
             this.btnRemoveRepositories.Size = new System.Drawing.Size(75, 23);
             this.btnRemoveRepositories.TabIndex = 12;
             this.btnRemoveRepositories.Text = "< Remove";
-            this.btnRemoveRepositories.UseVisualStyleBackColor = true;
+            this.btnRemoveRepositories.UseVisualStyleBackColor = false;
             // 
             // btnAddRepository
             // 
+            this.btnAddRepository.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnAddRepository.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddRepository.Location = new System.Drawing.Point(278, 69);
             this.btnAddRepository.Name = "btnAddRepository";
             this.btnAddRepository.Size = new System.Drawing.Size(75, 23);
             this.btnAddRepository.TabIndex = 11;
             this.btnAddRepository.Text = "Add >";
-            this.btnAddRepository.UseVisualStyleBackColor = true;
+            this.btnAddRepository.UseVisualStyleBackColor = false;
             // 
             // label4
             // 
@@ -448,23 +479,25 @@
             // 
             // btnRemoveIgnoredRepositories
             // 
+            this.btnRemoveIgnoredRepositories.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnRemoveIgnoredRepositories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemoveIgnoredRepositories.Location = new System.Drawing.Point(278, 118);
             this.btnRemoveIgnoredRepositories.Name = "btnRemoveIgnoredRepositories";
             this.btnRemoveIgnoredRepositories.Size = new System.Drawing.Size(75, 23);
             this.btnRemoveIgnoredRepositories.TabIndex = 19;
             this.btnRemoveIgnoredRepositories.Text = "< Remove";
-            this.btnRemoveIgnoredRepositories.UseVisualStyleBackColor = true;
+            this.btnRemoveIgnoredRepositories.UseVisualStyleBackColor = false;
             // 
             // btnAddIgnoredRepository
             // 
+            this.btnAddIgnoredRepository.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnAddIgnoredRepository.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddIgnoredRepository.Location = new System.Drawing.Point(278, 70);
             this.btnAddIgnoredRepository.Name = "btnAddIgnoredRepository";
             this.btnAddIgnoredRepository.Size = new System.Drawing.Size(75, 23);
             this.btnAddIgnoredRepository.TabIndex = 18;
             this.btnAddIgnoredRepository.Text = "Add >";
-            this.btnAddIgnoredRepository.UseVisualStyleBackColor = true;
+            this.btnAddIgnoredRepository.UseVisualStyleBackColor = false;
             // 
             // label7
             // 
@@ -515,7 +548,7 @@
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel5);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(3, 63);
+            this.groupBox1.Location = new System.Drawing.Point(3, 141);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(617, 60);
             this.groupBox1.TabIndex = 1;
@@ -585,7 +618,7 @@
             this.grpGitHubRefresh.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpGitHubRefresh.Location = new System.Drawing.Point(3, 3);
             this.grpGitHubRefresh.Name = "grpGitHubRefresh";
-            this.grpGitHubRefresh.Size = new System.Drawing.Size(617, 60);
+            this.grpGitHubRefresh.Size = new System.Drawing.Size(617, 138);
             this.grpGitHubRefresh.TabIndex = 0;
             this.grpGitHubRefresh.TabStop = false;
             this.grpGitHubRefresh.Text = "GitHub Refresh";
@@ -597,12 +630,16 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.Controls.Add(this.panel2, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.label10, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.chkStartWithWindows, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.chkShowBaloons, 0, 2);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(611, 41);
+            this.tableLayoutPanel4.RowCount = 3;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(611, 119);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // panel2
@@ -613,7 +650,7 @@
             this.panel2.Location = new System.Drawing.Point(305, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(306, 41);
+            this.panel2.Size = new System.Drawing.Size(306, 38);
             this.panel2.TabIndex = 0;
             // 
             // lstIntervalType
@@ -640,11 +677,23 @@
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 14);
+            this.label10.Location = new System.Drawing.Point(3, 12);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(189, 13);
             this.label10.TabIndex = 1;
             this.label10.Text = "Tracking interval (Default=30 minutes):";
+            // 
+            // chkStartWithWindows
+            // 
+            this.chkStartWithWindows.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkStartWithWindows.AutoSize = true;
+            this.tableLayoutPanel4.SetColumnSpan(this.chkStartWithWindows, 2);
+            this.chkStartWithWindows.Location = new System.Drawing.Point(3, 48);
+            this.chkStartWithWindows.Name = "chkStartWithWindows";
+            this.chkStartWithWindows.Size = new System.Drawing.Size(222, 17);
+            this.chkStartWithWindows.TabIndex = 2;
+            this.chkStartWithWindows.Text = "Start GitHub Issues Notifier with Windows";
+            this.chkStartWithWindows.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -702,30 +751,17 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
-            // txtNewRepositoryOwner
+            // chkShowBaloons
             // 
-            this.txtNewRepositoryOwner.Location = new System.Drawing.Point(72, 64);
-            this.txtNewRepositoryOwner.Name = "txtNewRepositoryOwner";
-            this.txtNewRepositoryOwner.Size = new System.Drawing.Size(196, 20);
-            this.txtNewRepositoryOwner.TabIndex = 14;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 92);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(60, 13);
-            this.label11.TabIndex = 15;
-            this.label11.Text = "Repository:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 67);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 13);
-            this.label12.TabIndex = 16;
-            this.label12.Text = "Owner:";
+            this.chkShowBaloons.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkShowBaloons.AutoSize = true;
+            this.tableLayoutPanel4.SetColumnSpan(this.chkShowBaloons, 2);
+            this.chkShowBaloons.Location = new System.Drawing.Point(3, 89);
+            this.chkShowBaloons.Name = "chkShowBaloons";
+            this.chkShowBaloons.Size = new System.Drawing.Size(295, 17);
+            this.chkShowBaloons.TabIndex = 3;
+            this.chkShowBaloons.Text = "Show Baloon notifications when new results are received";
+            this.chkShowBaloons.UseVisualStyleBackColor = true;
             // 
             // RepositoriesConfigDialog
             // 
@@ -829,5 +865,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtNewRepositoryOwner;
+        private System.Windows.Forms.CheckBox chkStartWithWindows;
+        private System.Windows.Forms.CheckBox chkShowBaloons;
     }
 }

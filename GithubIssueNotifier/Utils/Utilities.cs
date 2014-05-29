@@ -117,15 +117,19 @@ namespace GithubIssueNotifier.Utils
 
         public static void OverlayText(this NotifyIcon ni, Icon icon, string text,  Font font,  Color color)
         {
-            Bitmap bmp = icon.ToBitmap();
-            Graphics imageGraphics = Graphics.FromImage(bmp);
-            SolidBrush drawBrush = new SolidBrush(color);
-            StringFormat drawFormat = new StringFormat();
-            imageGraphics.DrawString(text, font, drawBrush, (text.Length>2) ? 4 : 8, 12, drawFormat);
-            font.Dispose();
-            drawBrush.Dispose();
-            imageGraphics.Dispose();
-            ni.Icon = Icon.FromHandle(bmp.GetHicon());
+            try
+            {
+                Bitmap bmp = icon.ToBitmap();
+                Graphics imageGraphics = Graphics.FromImage(bmp);
+                SolidBrush drawBrush = new SolidBrush(color);
+                StringFormat drawFormat = new StringFormat();
+                imageGraphics.DrawString(text, font, drawBrush, (text.Length > 2) ? 4 : 8, 12, drawFormat);
+                font.Dispose();
+                drawBrush.Dispose();
+                imageGraphics.Dispose();
+                ni.Icon = Icon.FromHandle(bmp.GetHicon());
+            }
+            catch { }
         }
 
         #endregion

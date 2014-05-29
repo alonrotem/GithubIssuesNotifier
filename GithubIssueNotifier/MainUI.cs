@@ -4,6 +4,9 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using GithubIssueNotifier.Wrappers.Configuration;
+using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace GithubIssueNotifier
 {
@@ -19,9 +22,27 @@ namespace GithubIssueNotifier
             this.refreshToolStripMenuItem.Click += refreshToolStripMenuItem_Click;
             this.optionsToolStripMenuItem.Click += optionsToolStripMenuItem_Click;
             this.exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            this.aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            this.forkOnGitHubToolStripMenuItem.Click += forkOnGitHubToolStripMenuItem_Click;
             NotifierActions.Refreshing += NotifierActions_Refreshing;
             NotifierActions.Refreshed += NotifierActions_Refreshed;
+            NotifierActions.NewResults += NotifierActions_NewResults;
             NotifierActions.RefreshIssuesData();
+
+
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            object regKey = key.GetValue(Constants.ConfigKey_StartWithWindows_RegKey);
+            if (regKey.Equals(Application.ExecutablePath))
+                ConfigWrapper.SetValue(Constants.ConfigKey_StartWithWindows, "true");
+
+            ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalRepositories, "");
+            ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalIssues, "");
+            ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalLateIssues, "");
+
+            bool configUnintialized = (((string.IsNullOrWhiteSpace(ConfigWrapper.GetValue(Constants.ConfigKey_GitHubUsername))) && (string.IsNullOrWhiteSpace(ConfigWrapper.GetValue(Constants.ConfigKey_GitHubPassword)))) ||
+                ((string.IsNullOrWhiteSpace(ConfigWrapper.GetValue(Constants.ConfigKey_TrackedOrganizations))) && (string.IsNullOrWhiteSpace(ConfigWrapper.GetValue(Constants.ConfigKey_TrackedRepositories)))));
+            if (configUnintialized)
+                NotifierActions.OpenConfig(true);
         }
 
         #region Menu actions
@@ -42,6 +63,18 @@ namespace GithubIssueNotifier
             Application.Exit();
         }
 
+        private void forkOnGitHubToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Constants.RepositoryURL);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutDialog about = new AboutDialog();
+            about.ShowDialog();
+        }
+
+
         #endregion
 
         #region Notifier events
@@ -54,12 +87,19 @@ namespace GithubIssueNotifier
 
         private void NotifierActions_Refreshed()
         {
-            this.notifyIcon.SetNotifyTextExtended(
-                string.Format("GitHub Issues Notifier\n{0} issues found in {1} repositories{2}.",
-                    NotifierActions.TotalIssues, 
-                    NotifierActions.TotalRepositories,
-                    (NotifierActions.TotalLateIssues == 0) ? "" : " [" + NotifierActions.TotalLateIssues + " with late issues]"));
+            this.notifyIcon.SetNotifyTextExtended(string.Format("GitHub Issues Notifier\n{0}", NotifierActions.StatsStr));
             this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Normal), NotifierActions.TotalIssues.ToString());
+        }
+
+        private void NotifierActions_NewResults()
+        {
+            if (ConfigWrapper.GetValue(Constants.ConfigKey_ShowBaloons, "false").ToLower() == "true")
+            {
+                this.notifyIcon.BalloonTipTitle = "New GitHub Issues!";
+                this.notifyIcon.BalloonTipText = NotifierActions.StatsStr;
+                this.notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+                this.notifyIcon.ShowBalloonTip(3000);
+            }
         }
 
         #endregion

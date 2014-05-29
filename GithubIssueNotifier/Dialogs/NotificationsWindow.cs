@@ -20,12 +20,17 @@ namespace GithubIssueNotifier.Dialogs
             this.picReload.Click += picReload_Click;
             this.picReload.Image = Utilities.GetImage(Constants.Img_Reload);
             this.loadingPic.Image = Utilities.GetImage(Constants.Img_Loading_Animation);
+            this.picError.Image = Utilities.GetImage(Constants.Img_Info);
+            this.lnkOpenConfig.Click += lnkOpenConfig_Click;
             this.loadingPanel.Visible = false;
+            this.errorPanel.Visible = false;
             this.reloadTooltip.SetToolTip(this.picReload, "Click to reload");
 
             this.exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             this.refreshToolStripMenuItem.Click += refreshToolStripMenuItem_Click;
             this.aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            this.readmeToolStripMenuItem.Click += readmeToolStripMenuItem_Click;
+            this.forkOnGitHubToolStripMenuItem.Click += forkOnGitHubToolStripMenuItem_Click;
             this.Text = string.Format("GitHub Issues Notifier v{0}", Assembly.GetExecutingAssembly().GetName().Version);
 
             this.RestoreGridColumns();
@@ -52,8 +57,7 @@ namespace GithubIssueNotifier.Dialogs
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RepositoriesConfigDialog configDlg = new RepositoriesConfigDialog(false);
-            configDlg.ShowDialog();
+            NotifierActions.OpenConfig(false);
         }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
@@ -70,6 +74,16 @@ namespace GithubIssueNotifier.Dialogs
         {
             AboutDialog about = new AboutDialog();
             about.ShowDialog();
+        }
+
+        private void forkOnGitHubToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Constants.RepositoryURL);
+        }
+
+        private void readmeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Constants.RepositoryReadmeURL);
         }
 
         #endregion
@@ -96,6 +110,10 @@ namespace GithubIssueNotifier.Dialogs
             this.Hide();
         }
 
+        private void lnkOpenConfig_Click(object sender, EventArgs e)
+        {
+            NotifierActions.OpenConfig(true);
+        }
 
         #endregion
 
@@ -162,31 +180,41 @@ namespace GithubIssueNotifier.Dialogs
                     {
                         row.Cells[0].Style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(255, 255, 255, 192) };
                         row.Cells[1].Style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(255, 255, 255, 192) };
-                        lateIssueDescription = string.Format("{0}{1}{2}", 
-                            (((repo.TimeSinceEarliestOpenIssue.Days > 0) || (repo.TimeSinceEarliestOpenIssue.Hours > 0)) ? "Late: ":""),
-                            ((repo.TimeSinceEarliestOpenIssue.Days > 0) ? ((repo.TimeSinceEarliestOpenIssue.Days == 1)? "1 day" : repo.TimeSinceEarliestOpenIssue.Days + " days")  : ""),
+                        lateIssueDescription = string.Format("{0}{1}{2}",
+                            (((repo.TimeSinceEarliestOpenIssue.Days > 0) || (repo.TimeSinceEarliestOpenIssue.Hours > 0)) ? "Late: " : ""),
+                            ((repo.TimeSinceEarliestOpenIssue.Days > 0) ? ((repo.TimeSinceEarliestOpenIssue.Days == 1) ? "1 day" : repo.TimeSinceEarliestOpenIssue.Days + " days") : ""),
                             ((repo.TimeSinceEarliestOpenIssue.Hours > 0) ? ((repo.TimeSinceEarliestOpenIssue.Hours == 1) ? ", 1 hour " : ", " + repo.TimeSinceEarliestOpenIssue.Hours + " hours") : ""));
                         totalReposWithLateIssues++;
                     }
                     row.Cells[0].Value = numOfOpenIssues == 0 ? imgRepoOK : imgRepoErr;
-                    row.Cells[1].Value = string.Format("{0} / {1} {2}{3}", 
-                        repo.Repo.Owner.Login, 
-                        repo.Repo.Name, 
+                    row.Cells[1].Value = string.Format("{0} / {1}{2}{3}",
+                        repo.Repo.Owner.Login,
+                        repo.Repo.Name,
                         ((numOfOpenIssues == 0) ? ("") : (" (" + numOfOpenIssues + ")")),
-                        lateIssueDescription == "" ? "" : " ["+ lateIssueDescription + "]");
+                        lateIssueDescription == "" ? "" : " [" + lateIssueDescription + "]");
                     row.Cells[1].ToolTipText = "Open " + repo.Repo.Name;
                     totalIssueCounter += numOfOpenIssues;
                 }
-            }
 
-            this.loadingPanel.Visible = false;
-            this.loadingPanel.SendToBack();
+                this.loadingPanel.Visible = false;
+                this.errorPanel.Visible = false;
+                this.errorPanel.SendToBack();
+                this.loadingPanel.SendToBack();
+                this.lblTotalIssues.Text = NotifierActions.StatsStr;
+                this.repositoriesGrid.ClearSelection();
+                this.repositoriesGrid.Visible = true;
+            }
+            else
+            {
+                this.repositoriesGrid.Visible = false;
+                this.loadingPanel.Visible = false;
+                this.loadingPanel.SendToBack();
+                this.errorPanel.Visible = true;
+                this.errorPanel.BringToFront();
+                this.lblTotalIssues.Text = "No results.";
+            }
             this.picReload.Image = Utilities.GetImage(Constants.Img_Reload);
             this.picReload.Enabled = true;
-            this.lblTotalIssues.Text = string.Format("{0} issues found in {1} repositories{2}.", 
-                totalIssueCounter, 
-                NotifierActions.RepoIssues.Count,
-                (totalReposWithLateIssues == 0) ? "" : " [" + totalReposWithLateIssues + " with late issues]");
         }
 
         #endregion

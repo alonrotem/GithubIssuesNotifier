@@ -141,6 +141,7 @@
     <EmbeddedResource Include="Images\FsmSmall.gif" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Images\Info.png" />
     <Content Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

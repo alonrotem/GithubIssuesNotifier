@@ -40,7 +40,7 @@ namespace GithubIssueNotifier.Utils
         {
             NotifierActions.TotalRepositories = 0;
             NotifierActions.TotalIssues = 0;
-            NotifierActions.TotalLateIssues = 0;
+            NotifierActions.TotalRepositoriesWithLateIssues = 0;
 
             DateTime scanTime = DateTime.Now;
             try
@@ -52,7 +52,7 @@ namespace GithubIssueNotifier.Utils
                     foreach (Repository orgRepository in GitHubWrapper.GetRepositoriesForOrganization(organization))
                     {
                         if ((!string.IsNullOrWhiteSpace(orgRepository.Name)) &&
-                            (!ignoredRepositories.Contains(orgRepository.Name)) &&
+                            (!ignoredRepositories.Contains(string.Format("{0} / {1}", orgRepository.Owner.Login, orgRepository.Name))) &&
                             (!trackedRepositories.Contains(orgRepository)))
                         {
                             trackedRepositories.Add(orgRepository);
@@ -78,6 +78,8 @@ namespace GithubIssueNotifier.Utils
                 }
                 foreach (Repository repo in trackedRepositories)
                 {
+                    if (repo == null)
+                        continue;
                     RepositoryIssues issues = new RepositoryIssues()
                     {
                         Repo = repo,
@@ -117,7 +119,7 @@ namespace GithubIssueNotifier.Utils
                             issues.IsLate = timeSinceThisIssue.TotalHours > (slaInterval * hoursFactor);
                             if ((issues.IsLate) && (!lateIssuesInThisRepository))
                             {
-                                NotifierActions.TotalLateIssues++;
+                                NotifierActions.TotalRepositoriesWithLateIssues++;
                                 lateIssuesInThisRepository = true;
                             }
                             if (timeSinceThisIssue > issues.TimeSinceEarliestOpenIssue)
@@ -130,6 +132,7 @@ namespace GithubIssueNotifier.Utils
                 }
                 NotifierActions.RepoIssues = NotifierActions.RepoIssues
                                                 .OrderByDescending(i => i.IsLate)
+                                                .ThenBy(i => i.OpenIssues.Count <= 0)
                                                 .ThenBy(i => i.Repo.Name)
                                                 .ToList();
             }
@@ -144,6 +147,19 @@ namespace GithubIssueNotifier.Utils
             NotifierActions.IsRefreshing = false;
             NotifierActions.OnRefreshed();
 
+            string configTotalRepos = ConfigWrapper.GetValue(Constants.ConfigKey_LastStatsTotalRepositories);
+            string configTotalIssues = ConfigWrapper.GetValue(Constants.ConfigKey_LastStatsTotalIssues);
+            string configTotalLate = ConfigWrapper.GetValue(Constants.ConfigKey_LastStatsTotalLateIssues);
+            if ((configTotalRepos != NotifierActions.TotalRepositories.ToString()) || 
+                (configTotalIssues != NotifierActions.TotalIssues.ToString()) || 
+                (configTotalLate != NotifierActions.TotalRepositoriesWithLateIssues.ToString()))
+            {
+                ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalRepositories, NotifierActions.TotalRepositories.ToString());
+                ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalIssues, NotifierActions.TotalIssues.ToString());
+                ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalLateIssues, NotifierActions.TotalIssues.ToString());
+                OnNewResults();
+            }
+
             NotifierActions.nextScanTimer.Interval = NotifierActions.GetNextInterval();
             if(NotifierActions.nextScanTimer.Interval > 0)
                 NotifierActions.nextScanTimer.Enabled = true;
@@ -155,8 +171,15 @@ namespace GithubIssueNotifier.Utils
 
         public static void OpenConfig(bool isWizard)
         {
-            RepositoriesConfigDialog configDlg = new RepositoriesConfigDialog(isWizard);
-            configDlg.ShowDialog();
+            if (RepositoriesConfigDialog.CurrentActiveDialog != null)
+            {
+                RepositoriesConfigDialog.CurrentActiveDialog.Focus();
+            }
+            else
+            {
+                RepositoriesConfigDialog configDlg = new RepositoriesConfigDialog(isWizard);
+                configDlg.ShowDialog();
+            }
         }
 
         #endregion
@@ -203,10 +226,23 @@ namespace GithubIssueNotifier.Utils
             private set;
         }
 
-        public static int TotalLateIssues
+        public static int TotalRepositoriesWithLateIssues
         {
             get;
             private set;
+        }
+
+        public static string StatsStr
+        {
+            get 
+            {
+                return string.Format("{0} issue{1} found in {2} repositor{3}{4}.",
+                    NotifierActions.TotalIssues,
+                    (NotifierActions.TotalIssues == 1) ? "" : "s",
+                    NotifierActions.RepoIssues.Count,
+                    (NotifierActions.RepoIssues.Count == 1) ? "y" : "ies",
+                    (NotifierActions.TotalRepositoriesWithLateIssues == 0) ? "" : " [" + NotifierActions.TotalRepositoriesWithLateIssues + " with late issues]");
+            }
         }
 
         #endregion
@@ -226,6 +262,12 @@ namespace GithubIssueNotifier.Utils
             {
                 NotifierActions.Refreshed();
             }
+        }
+
+        private static void OnNewResults()
+        {
+            if (NotifierActions.NewResults != null)
+                NotifierActions.NewResults();
         }
 
         #endregion
@@ -248,6 +290,7 @@ namespace GithubIssueNotifier.Utils
         private static readonly Timer nextScanTimer = new Timer();
         public static event RefereshHandler Refreshing;
         public static event RefereshHandler Refreshed;
+        public static event RefereshHandler NewResults;
         public static bool FirstScanPerformed = false;
     }
 }

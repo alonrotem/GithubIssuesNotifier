@@ -33,13 +33,13 @@ namespace GithubIssueNotifier.Wrappers.Configuration
         {
             var configElement = ConfigWrapper.SettingsSection.Settings[key];
             if (configElement != null)
-                return configElement.Value;
+                return configElement.Value.Trim();
             else
             {
                 if (!string.IsNullOrWhiteSpace(valueToSetIfNotExisting))
                 {
                     ConfigWrapper.SetValue(key, valueToSetIfNotExisting);
-                    return valueToSetIfNotExisting;
+                    return valueToSetIfNotExisting.Trim();
                 }
             }
             return null;

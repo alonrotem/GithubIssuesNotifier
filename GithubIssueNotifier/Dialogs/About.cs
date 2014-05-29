@@ -29,7 +29,7 @@ namespace GithubIssueNotifier.Dialogs
 
         private void lnkForkOnGithub_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/alonrotem/GithubIssuesNotifier");
+            Process.Start(Constants.RepositoryURL);
         }
 
         private void lnkOctoKit_Click(object sender, EventArgs e)

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace GithubIssueNotifier.Dialogs
 {
@@ -27,7 +28,8 @@ namespace GithubIssueNotifier.Dialogs
             this.tabTrackRepos.SelectedIndexChanged += tabTrackRepos_SelectedIndexChanged;
             this.btnWizardNext.Click += btnWizardNext_Click;
             this.btnWizardBack.Click += btnWizardBack_Click;
-            this.btnSaveCredentialsNoWizard.Click += btnSaveCredentialsNoWizard_Click; 
+            this.btnSaveCredentialsNoWizard.Click += btnSaveCredentialsNoWizard_Click;
+            this.FormClosed += RepositoriesConfigDialog_FormClosed;
 
             #region GitHub credentials
 
@@ -68,6 +70,8 @@ namespace GithubIssueNotifier.Dialogs
             this.txtIntervalNum.KeyPress += txtIntervalNum_KeyPress;
 
             this.chkSlaEnabled.Checked = ConfigWrapper.GetValue(Constants.ConfigKey_SLAEnabled, "true").ToLower() == "true";
+            this.chkStartWithWindows.Checked = ConfigWrapper.GetValue(Constants.ConfigKey_StartWithWindows, "false").ToLower() == "true";
+            this.chkShowBaloons.Checked = ConfigWrapper.GetValue(Constants.ConfigKey_ShowBaloons, "false").ToLower() == "true";
             this.txtSlaInterval.Text = ConfigWrapper.GetValue(Constants.ConfigKey_SLAInterval, "2");
             this.lstSlaIntervalType.SelectedItem = ConfigWrapper.GetValue(Constants.ConfigKey_SLAIntervalType, "days");
             this.txtSlaInterval.KeyPress += txtSlaInterval_KeyPress;
@@ -76,6 +80,7 @@ namespace GithubIssueNotifier.Dialogs
 
             this.btnSave.Click += btnSave_Click;
             this.btnCancel.Click += btnCancel_Click;
+            RepositoriesConfigDialog.CurrentActiveDialog = this;
         }
 
         #region GitHub credentials
@@ -307,7 +312,19 @@ namespace GithubIssueNotifier.Dialogs
             ConfigWrapper.SetValue(Constants.ConfigKey_SLAEnabled, this.chkSlaEnabled.Checked.ToString());
             ConfigWrapper.SetValue(Constants.ConfigKey_SLAInterval, slaInterval);
             ConfigWrapper.SetValue(Constants.ConfigKey_SLAIntervalType, slaIntervalType);
-
+            ConfigWrapper.SetValue(Constants.ConfigKey_StartWithWindows, this.chkStartWithWindows.Checked.ToString());
+            if (this.chkStartWithWindows.Checked)
+            {
+                RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                key.SetValue(Constants.ConfigKey_StartWithWindows_RegKey, Application.ExecutablePath);
+            }
+            else
+            {
+                RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                key.DeleteValue(Constants.ConfigKey_StartWithWindows_RegKey, false);
+            }
+            ConfigWrapper.SetValue(Constants.ConfigKey_ShowBaloons, this.chkShowBaloons.Checked.ToString());
+            GitHubWrapper.ResetCredentials();
             this.Close();
         }
 
@@ -315,6 +332,15 @@ namespace GithubIssueNotifier.Dialogs
         {
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.Close();
+        }
+
+        private void RepositoriesConfigDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (this.IsWizardMode)
+            {
+                NotifierActions.RefreshIssuesData();
+            }
+            RepositoriesConfigDialog.CurrentActiveDialog = null;
         }
 
         public bool IsWizardMode
@@ -368,6 +394,8 @@ namespace GithubIssueNotifier.Dialogs
                 }
             }
         }
+
+        public static RepositoriesConfigDialog CurrentActiveDialog = null;
 
         #endregion
     }

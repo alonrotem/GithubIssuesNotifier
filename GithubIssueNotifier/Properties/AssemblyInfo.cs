@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GithubIssueNotifier")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Github Issues Notifier")]
+[assembly: AssemblyDescription("GitHub Issues Notifier keeps track on GitHub open issues on selected repositories and reports in real time.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("GithubIssueNotifier")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright Alon Rotem ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
