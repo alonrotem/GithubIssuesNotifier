@@ -69,7 +69,7 @@ The notifications window lists all the tracked repositories marking the ones wit
 While scanning, an animation is displayed in the notifications window.
 ![](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/NotifierWin_Scanning.png)
 
-If the scan ends with no results at all (no repositories and no issues) which can indicate, for example, a network problem or a GitHub credentials issue, an error message is displayed.
+If the scan ends with no results at all (no repositories and no issues) which can indicate, for example, a network problem or a GitHub credentials issue, an error message is displayed.   
 ![](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/NotifierWin_NoResults.png)
 
 In order to refresh the repositories on demand at any time, there are 2 options:
