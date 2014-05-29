@@ -71,7 +71,7 @@ namespace GithubIssueNotifier.Dialogs
 
             this.chkSlaEnabled.Checked = ConfigWrapper.GetValue(Constants.ConfigKey_SLAEnabled, "true").ToLower() == "true";
             this.chkStartWithWindows.Checked = ConfigWrapper.GetValue(Constants.ConfigKey_StartWithWindows, "false").ToLower() == "true";
-            this.chkShowBaloons.Checked = ConfigWrapper.GetValue(Constants.ConfigKey_ShowBaloons, "false").ToLower() == "true";
+            this.chkShowBaloons.Checked = ConfigWrapper.GetValue(Constants.ConfigKey_ShowBaloons, "true").ToLower() == "true";
             this.txtSlaInterval.Text = ConfigWrapper.GetValue(Constants.ConfigKey_SLAInterval, "2");
             this.lstSlaIntervalType.SelectedItem = ConfigWrapper.GetValue(Constants.ConfigKey_SLAIntervalType, "days");
             this.txtSlaInterval.KeyPress += txtSlaInterval_KeyPress;
