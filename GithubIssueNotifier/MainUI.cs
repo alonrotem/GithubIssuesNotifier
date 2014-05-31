@@ -91,7 +91,7 @@ namespace GithubIssueNotifier
             this.isRefreshing = true;
             this.isRefreshed = false;
             this.notifyIcon.Text = "GitHub Issues Notifier\nScanning...";
-            //this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Normal), "***");
+            this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Normal), "***");
         }
 
         private void NotifierActions_Refreshed()
@@ -100,6 +100,8 @@ namespace GithubIssueNotifier
             this.isRefreshed = true;
             if(NotifierActions.TotalIssues > 0)
                 this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Normal), NotifierActions.TotalIssues.ToString());
+            else
+                this.notifyIcon.Icon = Utilities.GetIcon(Constants.Icon_Tray_Normal);
         }
 
         private void notifyIcon_MouseMove(object sender, MouseEventArgs e)
