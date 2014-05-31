@@ -51,7 +51,8 @@ Once you are done, click **Save** to save all your settings and close the settin
 ##Working with GitHub Issues Notifier
 ###System tray notifications
 Once your settings are saved and GitHub Issues Notifier is active, an icon will appear in your system's notification area (system tray) with a tooltip indicating its current status.   
-![Scanning...](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_Scanning.png)
+![Scanning...](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_Scanning.png)   
+![Tooltip with results](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_TooltipFull.png)
 
 If baloon notifications are active, when scanning is complete with new results, a notification baloon will appear.
 ![Baloon notifications](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_Baloon.png)
