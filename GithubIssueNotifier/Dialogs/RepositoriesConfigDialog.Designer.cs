@@ -80,12 +80,12 @@
             this.txtIntervalNum = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.chkStartWithWindows = new System.Windows.Forms.CheckBox();
+            this.chkShowBaloons = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnWizardNext = new System.Windows.Forms.Button();
             this.btnWizardBack = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.chkShowBaloons = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabTrackRepos.SuspendLayout();
             this.tabGitHubSettings.SuspendLayout();
@@ -306,11 +306,11 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Green;
-            this.label1.Location = new System.Drawing.Point(6, 19);
+            this.label1.Location = new System.Drawing.Point(357, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(293, 13);
+            this.label1.Size = new System.Drawing.Size(235, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Add GitHub organizations to be tracked for issues.";
+            this.label1.Text = "Add GitHub organizations to be tracked:";
             // 
             // lblTrackOrganizations
             // 
@@ -420,11 +420,11 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Green;
-            this.label4.Location = new System.Drawing.Point(6, 17);
+            this.label4.Location = new System.Drawing.Point(357, 16);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(283, 13);
+            this.label4.Size = new System.Drawing.Size(225, 13);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Add GitHub repositories to be tracked for issues.";
+            this.label4.Text = "Add GitHub repositories to be tracked:";
             // 
             // label5
             // 
@@ -504,7 +504,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(12, 20);
+            this.label7.Location = new System.Drawing.Point(360, 17);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(181, 13);
             this.label7.TabIndex = 17;
@@ -695,6 +695,18 @@
             this.chkStartWithWindows.Text = "Start GitHub Issues Notifier with Windows";
             this.chkStartWithWindows.UseVisualStyleBackColor = true;
             // 
+            // chkShowBaloons
+            // 
+            this.chkShowBaloons.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkShowBaloons.AutoSize = true;
+            this.tableLayoutPanel4.SetColumnSpan(this.chkShowBaloons, 2);
+            this.chkShowBaloons.Location = new System.Drawing.Point(3, 89);
+            this.chkShowBaloons.Name = "chkShowBaloons";
+            this.chkShowBaloons.Size = new System.Drawing.Size(295, 17);
+            this.chkShowBaloons.TabIndex = 3;
+            this.chkShowBaloons.Text = "Show Baloon notifications when new results are received";
+            this.chkShowBaloons.UseVisualStyleBackColor = true;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnWizardNext);
@@ -750,18 +762,6 @@
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            // 
-            // chkShowBaloons
-            // 
-            this.chkShowBaloons.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.chkShowBaloons.AutoSize = true;
-            this.tableLayoutPanel4.SetColumnSpan(this.chkShowBaloons, 2);
-            this.chkShowBaloons.Location = new System.Drawing.Point(3, 89);
-            this.chkShowBaloons.Name = "chkShowBaloons";
-            this.chkShowBaloons.Size = new System.Drawing.Size(295, 17);
-            this.chkShowBaloons.TabIndex = 3;
-            this.chkShowBaloons.Text = "Show Baloon notifications when new results are received";
-            this.chkShowBaloons.UseVisualStyleBackColor = true;
             // 
             // RepositoriesConfigDialog
             // 

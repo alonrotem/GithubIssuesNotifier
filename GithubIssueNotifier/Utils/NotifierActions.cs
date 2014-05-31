@@ -32,8 +32,9 @@ namespace GithubIssueNotifier.Utils
             NotifierActions.FirstScanPerformed = true;
             NotifierActions.IsRefreshing = true;
             NotifierActions.OnRefreshing();
-            NotifierActions.refreshWorker.RunWorkerAsync();
+            NotifierActions.lastScanTime = DateTime.Now;
             NotifierActions.nextScanTimer.Enabled = false;
+            NotifierActions.refreshWorker.RunWorkerAsync();
         }
 
         private static void RefreshWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -147,17 +148,20 @@ namespace GithubIssueNotifier.Utils
             NotifierActions.IsRefreshing = false;
             NotifierActions.OnRefreshed();
 
-            string configTotalRepos = ConfigWrapper.GetValue(Constants.ConfigKey_LastStatsTotalRepositories);
-            string configTotalIssues = ConfigWrapper.GetValue(Constants.ConfigKey_LastStatsTotalIssues);
-            string configTotalLate = ConfigWrapper.GetValue(Constants.ConfigKey_LastStatsTotalLateIssues);
-            if ((configTotalRepos != NotifierActions.TotalRepositories.ToString()) || 
-                (configTotalIssues != NotifierActions.TotalIssues.ToString()) || 
-                (configTotalLate != NotifierActions.TotalRepositoriesWithLateIssues.ToString()))
+            if ((NotifierActions.TotalRepositoriesWithLateIssues > 0) || (NotifierActions.TotalIssues > 0))
             {
-                ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalRepositories, NotifierActions.TotalRepositories.ToString());
-                ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalIssues, NotifierActions.TotalIssues.ToString());
-                ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalLateIssues, NotifierActions.TotalIssues.ToString());
-                OnNewResults();
+                string configTotalRepos = ConfigWrapper.GetValue(Constants.ConfigKey_LastStatsTotalRepositories);
+                string configTotalIssues = ConfigWrapper.GetValue(Constants.ConfigKey_LastStatsTotalIssues);
+                string configTotalLate = ConfigWrapper.GetValue(Constants.ConfigKey_LastStatsTotalLateIssues);
+                if ((configTotalRepos != NotifierActions.TotalRepositories.ToString()) ||
+                    (configTotalIssues != NotifierActions.TotalIssues.ToString()) ||
+                    (configTotalLate != NotifierActions.TotalRepositoriesWithLateIssues.ToString()))
+                {
+                    ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalRepositories, NotifierActions.TotalRepositories.ToString());
+                    ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalIssues, NotifierActions.TotalIssues.ToString());
+                    ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalLateIssues, NotifierActions.TotalIssues.ToString());
+                    OnNewResults();
+                }
             }
 
             NotifierActions.nextScanTimer.Interval = NotifierActions.GetNextInterval();
@@ -245,6 +249,22 @@ namespace GithubIssueNotifier.Utils
             }
         }
 
+        public static string LastRunStr
+        {
+            get 
+            {
+                if (NotifierActions.lastScanTime == DateTime.MinValue)
+                    return "Not run yet";
+                TimeSpan lastScanDff = DateTime.Now - NotifierActions.lastScanTime;
+                if ((lastScanDff.Hours == 0) && (lastScanDff.Minutes == 0))
+                    return "Just now";
+                return string.Format("{0}{1}{2} ago",
+                    ((lastScanDff.Hours == 0) ? "" : ((lastScanDff.Hours == 1) ? ("1 hour") : (lastScanDff.Hours.ToString() + " hours"))),
+                    ((lastScanDff.Hours == 0)? "": " and "),
+                    ((lastScanDff.Minutes == 1) ? ("1 minute") : (lastScanDff.Minutes.ToString() + " minutes")));
+            }
+        }
+
         #endregion
 
         #region Event handlers
@@ -292,5 +312,6 @@ namespace GithubIssueNotifier.Utils
         public static event RefereshHandler Refreshed;
         public static event RefereshHandler NewResults;
         public static bool FirstScanPerformed = false;
+        private static DateTime lastScanTime = DateTime.MinValue;
     }
 }

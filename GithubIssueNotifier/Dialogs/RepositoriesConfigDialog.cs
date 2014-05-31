@@ -315,12 +315,12 @@ namespace GithubIssueNotifier.Dialogs
             ConfigWrapper.SetValue(Constants.ConfigKey_StartWithWindows, this.chkStartWithWindows.Checked.ToString());
             if (this.chkStartWithWindows.Checked)
             {
-                RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(Constants.ConfigKey_StartWithWindows_StartupRunPath, true);
                 key.SetValue(Constants.ConfigKey_StartWithWindows_RegKey, Application.ExecutablePath);
             }
             else
             {
-                RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(Constants.ConfigKey_StartWithWindows_StartupRunPath, true);
                 key.DeleteValue(Constants.ConfigKey_StartWithWindows_RegKey, false);
             }
             ConfigWrapper.SetValue(Constants.ConfigKey_ShowBaloons, this.chkShowBaloons.Checked.ToString());

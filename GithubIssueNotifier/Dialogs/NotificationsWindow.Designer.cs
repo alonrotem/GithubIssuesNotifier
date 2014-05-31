@@ -34,6 +34,8 @@ namespace GithubIssueNotifier.Dialogs
             this.il = new System.Windows.Forms.ImageList(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorPanel = new System.Windows.Forms.Panel();
+            this.lnkOpenConfig = new System.Windows.Forms.LinkLabel();
+            this.label2 = new System.Windows.Forms.Label();
             this.picError = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -54,8 +56,6 @@ namespace GithubIssueNotifier.Dialogs
             this.label1 = new System.Windows.Forms.Label();
             this.loadingPic = new System.Windows.Forms.PictureBox();
             this.reloadTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.lnkOpenConfig = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.errorPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picError)).BeginInit();
@@ -76,9 +76,9 @@ namespace GithubIssueNotifier.Dialogs
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.errorPanel);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Controls.Add(this.loadingPanel);
+            this.panel1.Controls.Add(this.errorPanel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -93,9 +93,31 @@ namespace GithubIssueNotifier.Dialogs
             this.errorPanel.Controls.Add(this.label2);
             this.errorPanel.Controls.Add(this.picError);
             this.errorPanel.Location = new System.Drawing.Point(2, 24);
-            this.errorPanel.Name = "erroePanel";
+            this.errorPanel.Name = "errorPanel";
             this.errorPanel.Size = new System.Drawing.Size(381, 332);
             this.errorPanel.TabIndex = 2;
+            // 
+            // lnkOpenConfig
+            // 
+            this.lnkOpenConfig.AutoSize = true;
+            this.lnkOpenConfig.Location = new System.Drawing.Point(104, 211);
+            this.lnkOpenConfig.Name = "lnkOpenConfig";
+            this.lnkOpenConfig.Size = new System.Drawing.Size(157, 13);
+            this.lnkOpenConfig.TabIndex = 2;
+            this.lnkOpenConfig.TabStop = true;
+            this.lnkOpenConfig.Text = "Open the configuration wizard...";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Gray;
+            this.label2.Location = new System.Drawing.Point(58, 111);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(309, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Failed to load any repository results...";
             // 
             // picError
             // 
@@ -276,28 +298,6 @@ namespace GithubIssueNotifier.Dialogs
             this.loadingPic.Size = new System.Drawing.Size(128, 128);
             this.loadingPic.TabIndex = 0;
             this.loadingPic.TabStop = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Gray;
-            this.label2.Location = new System.Drawing.Point(58, 111);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(309, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Failed to load any repository results...";
-            // 
-            // lnkOpenConfig
-            // 
-            this.lnkOpenConfig.AutoSize = true;
-            this.lnkOpenConfig.Location = new System.Drawing.Point(104, 211);
-            this.lnkOpenConfig.Name = "lnkOpenConfig";
-            this.lnkOpenConfig.Size = new System.Drawing.Size(157, 13);
-            this.lnkOpenConfig.TabIndex = 2;
-            this.lnkOpenConfig.TabStop = true;
-            this.lnkOpenConfig.Text = "Open the configuration wizard...";
             // 
             // NotificationsWindow
             // 

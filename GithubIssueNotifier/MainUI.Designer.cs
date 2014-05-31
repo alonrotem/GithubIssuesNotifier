@@ -31,12 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openNotificaitionsWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.forkOnGitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openNotificaitionsWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,41 +52,11 @@
             this.openNotificaitionsWindowToolStripMenuItem,
             this.refreshToolStripMenuItem,
             this.optionsToolStripMenuItem,
-            this.aboutToolStripMenuItem,
             this.forkOnGitHubToolStripMenuItem,
+            this.aboutToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.contextMenu.Name = "contextMenu";
             this.contextMenu.Size = new System.Drawing.Size(227, 158);
-            // 
-            // refreshToolStripMenuItem
-            // 
-            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.refreshToolStripMenuItem.Text = "&Refresh";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.optionsToolStripMenuItem.Text = "&Options wizard";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.aboutToolStripMenuItem.Text = "&About";
-            // 
-            // forkOnGitHubToolStripMenuItem
-            // 
-            this.forkOnGitHubToolStripMenuItem.Name = "forkOnGitHubToolStripMenuItem";
-            this.forkOnGitHubToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.forkOnGitHubToolStripMenuItem.Text = "Fork on &GitHub...";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // openNotificaitionsWindowToolStripMenuItem
             // 
@@ -94,6 +64,36 @@
             this.openNotificaitionsWindowToolStripMenuItem.Name = "openNotificaitionsWindowToolStripMenuItem";
             this.openNotificaitionsWindowToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.openNotificaitionsWindowToolStripMenuItem.Text = "Open notificaitions window";
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.refreshToolStripMenuItem.Text = "&Refresh";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.optionsToolStripMenuItem.Text = "&Options wizard";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.aboutToolStripMenuItem.Text = "&About";
+            // 
+            // forkOnGitHubToolStripMenuItem
+            // 
+            this.forkOnGitHubToolStripMenuItem.Name = "forkOnGitHubToolStripMenuItem";
+            this.forkOnGitHubToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.forkOnGitHubToolStripMenuItem.Text = "Fork on &GitHub...";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // MainUI
             // 

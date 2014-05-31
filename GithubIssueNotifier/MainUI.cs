@@ -29,11 +29,12 @@ namespace GithubIssueNotifier
             NotifierActions.Refreshed += NotifierActions_Refreshed;
             NotifierActions.NewResults += NotifierActions_NewResults;
             NotifierActions.RefreshIssuesData();
+            this.notifyIcon.MouseMove += notifyIcon_MouseMove;
 
 
-            RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(Constants.ConfigKey_StartWithWindows_StartupRunPath, true);
             object regKey = key.GetValue(Constants.ConfigKey_StartWithWindows_RegKey);
-            if (regKey.Equals(Application.ExecutablePath))
+            if ((regKey == null) || (regKey.Equals(Application.ExecutablePath)))
                 ConfigWrapper.SetValue(Constants.ConfigKey_StartWithWindows, "true");
 
             ConfigWrapper.SetValue(Constants.ConfigKey_LastStatsTotalRepositories, "");
@@ -87,14 +88,28 @@ namespace GithubIssueNotifier
 
         private void NotifierActions_Refreshing()
         {
+            this.isRefreshing = true;
+            this.isRefreshed = false;
             this.notifyIcon.Text = "GitHub Issues Notifier\nScanning...";
             //this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Normal), "***");
         }
 
         private void NotifierActions_Refreshed()
         {
-            this.notifyIcon.SetNotifyTextExtended(string.Format("GitHub Issues Notifier\n{0}", NotifierActions.StatsStr));
-            this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Normal), NotifierActions.TotalIssues.ToString());
+            this.isRefreshing = false;
+            this.isRefreshed = true;
+            if(NotifierActions.TotalIssues > 0)
+                this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Normal), NotifierActions.TotalIssues.ToString());
+        }
+
+        private void notifyIcon_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(this.isRefreshing)
+                 this.notifyIcon.SetNotifyTextExtended("GitHub Issues Notifier\nScanning...");
+            else if (this.isRefreshed)
+                this.notifyIcon.SetNotifyTextExtended(string.Format("GitHub Issues Notifier\n{0}\nLast scan: {1}.", 
+                    NotifierActions.StatsStr,
+                    NotifierActions.LastRunStr));
         }
 
         private void NotifierActions_NewResults()
@@ -128,9 +143,6 @@ namespace GithubIssueNotifier
             }
             else
             {
-
-                //Point p = Control.MousePosition;
-
                 this.notificationsWindow = new NotificationsWindow() { StartPosition = FormStartPosition.Manual };
                 this.notificationsWindow.Show();
                 int x = Screen.PrimaryScreen.WorkingArea.Width - this.notificationsWindow.Width;
@@ -156,6 +168,8 @@ namespace GithubIssueNotifier
 
         #endregion
 
+        bool isRefreshing = false;
+        bool isRefreshed = false;
         bool isActiveWindow = false;
         NotificationsWindow notificationsWindow = null;
 
