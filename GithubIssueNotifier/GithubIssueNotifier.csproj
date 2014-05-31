@@ -145,6 +145,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\Info.png" />
+    <EmbeddedResource Include="Images\IconTrayGreen.ico" />
+    <EmbeddedResource Include="Images\IconTrayRed.ico" />
+    <EmbeddedResource Include="Images\IconTrayPink.ico" />
     <Content Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -99,9 +99,9 @@ namespace GithubIssueNotifier
             this.isRefreshing = false;
             this.isRefreshed = true;
             if(NotifierActions.TotalIssues > 0)
-                this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Normal), NotifierActions.TotalIssues.ToString());
+                this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Pink), NotifierActions.TotalIssues.ToString());
             else
-                this.notifyIcon.Icon = Utilities.GetIcon(Constants.Icon_Tray_Normal);
+                this.notifyIcon.Icon = Utilities.GetIcon(Constants.Icon_Tray_Green);
         }
 
         private void notifyIcon_MouseMove(object sender, MouseEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -112,7 +113,7 @@ namespace GithubIssueNotifier.Utils
 
         public static void OverlayText(this NotifyIcon ni, Icon icon, string text)
         {
-            ni.OverlayText(icon, text, new System.Drawing.Font("Arial", 12, FontStyle.Bold), Color.Red);
+            ni.OverlayText(icon, text, new Font("Arial", 12, FontStyle.Bold), Color.DarkRed);
         }
 
         public static void OverlayText(this NotifyIcon ni, Icon icon, string text,  Font font,  Color color)
@@ -124,6 +125,7 @@ namespace GithubIssueNotifier.Utils
                 SolidBrush drawBrush = new SolidBrush(color);
                 StringFormat drawFormat = new StringFormat();
                 imageGraphics.DrawString(text, font, drawBrush, (text.Length > 2) ? 4 : 8, 12, drawFormat);
+                imageGraphics.SmoothingMode = SmoothingMode.HighQuality;
                 font.Dispose();
                 drawBrush.Dispose();
                 imageGraphics.Dispose();
