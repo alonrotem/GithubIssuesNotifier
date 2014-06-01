@@ -5,7 +5,7 @@ It runs automatic scheduled scans for open issues in GitHub repositories and/or 
 
 GitHub Issues Notifier uses [OctoKit.NET](https://github.com/octokit/octokit.net) open library to integrate with GitHub's API.
 
-**More info on a post in [my blog, AlonInTheWorld.com](http://www.alonintheworld.com/2014/06/project-keeping-track-of-your-github.html).   **
+**More info on a post in [my blog, AlonInTheWorld.com](http://www.alonintheworld.com/2014/06/project-keeping-track-of-your-github.html).**   
 
 ![About GitHub Issues Notifier](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/AboutDialog.png).
 
