@@ -71,7 +71,7 @@ namespace GithubIssueNotifier.Dialogs
 
             this.chkSlaEnabled.Checked = ConfigWrapper.GetValue(Constants.ConfigKey_SLAEnabled, "true").ToLower() == "true";
             this.chkStartWithWindows.Checked = ConfigWrapper.GetValue(Constants.ConfigKey_StartWithWindows, "false").ToLower() == "true";
-            this.chkShowBaloons.Checked = ConfigWrapper.GetValue(Constants.ConfigKey_ShowBaloons, "true").ToLower() == "true";
+            this.chkShowBalloons.Checked = ConfigWrapper.GetValue(Constants.ConfigKey_ShowBalloons, "true").ToLower() == "true";
             this.txtSlaInterval.Text = ConfigWrapper.GetValue(Constants.ConfigKey_SLAInterval, "2");
             this.lstSlaIntervalType.SelectedItem = ConfigWrapper.GetValue(Constants.ConfigKey_SLAIntervalType, "days");
             this.txtSlaInterval.KeyPress += txtSlaInterval_KeyPress;
@@ -323,7 +323,7 @@ namespace GithubIssueNotifier.Dialogs
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(Constants.ConfigKey_StartWithWindows_StartupRunPath, true);
                 key.DeleteValue(Constants.ConfigKey_StartWithWindows_RegKey, false);
             }
-            ConfigWrapper.SetValue(Constants.ConfigKey_ShowBaloons, this.chkShowBaloons.Checked.ToString());
+            ConfigWrapper.SetValue(Constants.ConfigKey_ShowBalloons, this.chkShowBalloons.Checked.ToString());
             GitHubWrapper.ResetCredentials();
             this.Close();
         }

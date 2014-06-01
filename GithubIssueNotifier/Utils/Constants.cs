@@ -27,7 +27,7 @@ namespace GithubIssueNotifier.Utils
         public const string ConfigKey_TrackingInterval = @"TrackingInterval";
         public const string ConfigKey_TrackingIntervalType = @"TrackingIntervalType";
         public const string ConfigKey_StartWithWindows = @"StartWithWindows";
-        public const string ConfigKey_ShowBaloons = @"ShowBaloons";
+        public const string ConfigKey_ShowBalloons = @"ShowBalloons";
         public const string ConfigKey_LastStatsTotalRepositories = @"LastStatsTotalRepositories";
         public const string ConfigKey_LastStatsTotalIssues = @"LastStatsTotalIssues";
         public const string ConfigKey_LastStatsTotalLateIssues = @"LastStatsTotalLateIssues";

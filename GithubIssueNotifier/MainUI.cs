@@ -116,7 +116,7 @@ namespace GithubIssueNotifier
 
         private void NotifierActions_NewResults()
         {
-            if (ConfigWrapper.GetValue(Constants.ConfigKey_ShowBaloons, "false").ToLower() == "true")
+            if (ConfigWrapper.GetValue(Constants.ConfigKey_ShowBalloons, "false").ToLower() == "true")
             {
                 this.notifyIcon.BalloonTipTitle = "New GitHub Issues!";
                 this.notifyIcon.BalloonTipText = NotifierActions.StatsStr;

@@ -137,7 +137,7 @@ namespace GithubIssueNotifier.Utils
                                                 .ThenBy(i => i.Repo.Name)
                                                 .ToList();
             }
-            catch (Exception x)
+            catch
             {
                 GitHubWrapper.ResetCredentials();
             }

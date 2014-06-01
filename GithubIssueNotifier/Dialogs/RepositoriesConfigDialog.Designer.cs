@@ -80,7 +80,7 @@
             this.txtIntervalNum = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.chkStartWithWindows = new System.Windows.Forms.CheckBox();
-            this.chkShowBaloons = new System.Windows.Forms.CheckBox();
+            this.chkShowBalloons = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnWizardNext = new System.Windows.Forms.Button();
             this.btnWizardBack = new System.Windows.Forms.Button();
@@ -631,7 +631,7 @@
             this.tableLayoutPanel4.Controls.Add(this.panel2, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.label10, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.chkStartWithWindows, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.chkShowBaloons, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.chkShowBalloons, 0, 2);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -695,17 +695,17 @@
             this.chkStartWithWindows.Text = "Start GitHub Issues Notifier with Windows";
             this.chkStartWithWindows.UseVisualStyleBackColor = true;
             // 
-            // chkShowBaloons
+            // chkShowBalloons
             // 
-            this.chkShowBaloons.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.chkShowBaloons.AutoSize = true;
-            this.tableLayoutPanel4.SetColumnSpan(this.chkShowBaloons, 2);
-            this.chkShowBaloons.Location = new System.Drawing.Point(3, 89);
-            this.chkShowBaloons.Name = "chkShowBaloons";
-            this.chkShowBaloons.Size = new System.Drawing.Size(295, 17);
-            this.chkShowBaloons.TabIndex = 3;
-            this.chkShowBaloons.Text = "Show Baloon notifications when new results are received";
-            this.chkShowBaloons.UseVisualStyleBackColor = true;
+            this.chkShowBalloons.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkShowBalloons.AutoSize = true;
+            this.tableLayoutPanel4.SetColumnSpan(this.chkShowBalloons, 2);
+            this.chkShowBalloons.Location = new System.Drawing.Point(3, 89);
+            this.chkShowBalloons.Name = "chkShowBalloons";
+            this.chkShowBalloons.Size = new System.Drawing.Size(295, 17);
+            this.chkShowBalloons.TabIndex = 3;
+            this.chkShowBalloons.Text = "Show Balloon notifications when new results are received";
+            this.chkShowBalloons.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -866,6 +866,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtNewRepositoryOwner;
         private System.Windows.Forms.CheckBox chkStartWithWindows;
-        private System.Windows.Forms.CheckBox chkShowBaloons;
+        private System.Windows.Forms.CheckBox chkShowBalloons;
     }
 }

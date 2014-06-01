@@ -14,7 +14,7 @@ namespace GithubIssueNotifier
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MainUI ui = new MainUI();
+            new MainUI();
             Application.Run();
         }
     }
