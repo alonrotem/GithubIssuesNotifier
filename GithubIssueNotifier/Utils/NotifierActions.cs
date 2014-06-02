@@ -69,8 +69,8 @@ namespace GithubIssueNotifier.Utils
                         string[] parts = additionalRepository.Split('/');
                         if (parts.Length > 1)
                         {
-                            string repoowner = parts[0];
-                            string reponame = parts[1];
+                            string repoowner = parts[0].Trim();
+                            string reponame = parts[1].Trim();
                             if (trackedRepositories.FirstOrDefault(r => r.Name == reponame && r.Owner.Name == repoowner) == null)
                                 trackedRepositories.Add(GitHubWrapper.GetRepository(repoowner, reponame));
                         }
@@ -134,6 +134,7 @@ namespace GithubIssueNotifier.Utils
                 NotifierActions.RepoIssues = NotifierActions.RepoIssues
                                                 .OrderByDescending(i => i.IsLate)
                                                 .ThenBy(i => i.OpenIssues.Count <= 0)
+                                                .ThenBy(i => i.Repo.Owner.Login)
                                                 .ThenBy(i => i.Repo.Name)
                                                 .ToList();
             }
