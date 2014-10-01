@@ -13,7 +13,7 @@ namespace GithubIssueNotifier.Dialogs
         {
             InitializeComponent();
             this.Text = this.Text = "About GitHub Issues Notifier";
-            this.label1.Text = string.Format("GitHub Issues Notifierv{0}", Assembly.GetExecutingAssembly().GetName().Version);
+            this.label1.Text = string.Format("GitHub Issues Notifier v{0}", Assembly.GetExecutingAssembly().GetName().Version);
             this.imgFSM.Image = Utilities.GetImage("GithubIssueNotifier.Images.FsmSmall.gif");
             this.btnOk.Click += btnOk_Click;
             this.lnkOctoKit.Click += lnkOctoKit_Click;

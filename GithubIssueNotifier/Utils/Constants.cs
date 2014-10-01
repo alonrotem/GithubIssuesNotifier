@@ -33,6 +33,7 @@ namespace GithubIssueNotifier.Utils
         public const string ConfigKey_LastStatsTotalLateIssues = @"LastStatsTotalLateIssues";
         public const string ConfigKey_StartWithWindows_StartupRunPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
         public const string ConfigKey_StartWithWindows_RegKey = @"GitHubIssuesNotifier";
+        public const string ConfigKey_UseAnimations = @"UseAnimations";
 
         public const string ConfigKey_SLAEnabled = @"SLAEnabled";
         public const string ConfigKey_SLAInterval = @"SLAInterval";

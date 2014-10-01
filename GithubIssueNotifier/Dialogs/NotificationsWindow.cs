@@ -1,5 +1,7 @@
 ﻿using GithubIssueNotifier.Utils;
+using GithubIssueNotifier.Wrappers.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -33,6 +35,17 @@ namespace GithubIssueNotifier.Dialogs
             this.forkOnGitHubToolStripMenuItem.Click += forkOnGitHubToolStripMenuItem_Click;
             this.Text = string.Format("GitHub Issues Notifier v{0}", Assembly.GetExecutingAssembly().GetName().Version);
 
+            this.goToIssuesToolStripMenuItem.Image = Utilities.GetImage("GithubIssueNotifier.Images.MenuGoToIssues.png");
+            this.goToIssuesToolStripMenuItem.Click += goToIssuesToolStripMenuItem_Click;
+            this.goToToolStripMenuItem.Image = Utilities.GetImage("GithubIssueNotifier.Images.MenuGoToRepo.png");
+            this.goToToolStripMenuItem.Click += goToToolStripMenuItem_Click;
+            this.ignoreThisRepositoryToolStripMenuItem.Image = Utilities.GetImage("GithubIssueNotifier.Images.MenuIgnoreRepo.png");
+            this.ignoreThisRepositoryToolStripMenuItem.Click += ignoreThisRepositoryToolStripMenuItem_Click;
+            this.repositoriesGrid.CellMouseUp += repositoriesGrid_CellMouseUp;
+            this.repositoriesGrid.ContextMenuStrip = this.contextMenuRepoActions;
+
+            this.useAnimationsToolStripMenuItem.Checked = ConfigWrapper.GetValue(Constants.ConfigKey_UseAnimations) == "1";
+
             this.RestoreGridColumns();
 
             NotifierActions.Refreshing += NotifierActions_Refreshing;
@@ -53,7 +66,45 @@ namespace GithubIssueNotifier.Dialogs
             }
         }
 
+
         #region Menu actions
+
+        private void goToIssuesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.GoToRepository(currentContextMenuGridItem, true);
+        }
+
+        private void goToToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.GoToRepository(currentContextMenuGridItem, false);
+        }
+
+
+        private void ignoreThisRepositoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int prevX = this.Left;
+            int prevY = this.Top;
+            if (MessageBox.Show(
+                string.Format("Are you sure you want to add \"{0}\" to the ignore list?", NotifierActions.RepoIssues[currentContextMenuGridItem].Repo.Name),
+                "Confirm Ignore",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                string repoName = string.Format("{0} / {1}", 
+                    NotifierActions.RepoIssues[currentContextMenuGridItem].Repo.Owner.Login, 
+                    NotifierActions.RepoIssues[currentContextMenuGridItem].Repo.Name);
+
+                ConfigWrapper.AddValueToCollection(Constants.ConfigKey_IgnoredRepositories, repoName);
+                ConfigWrapper.RemoveValueToCollection(Constants.ConfigKey_TrackedRepositories, repoName);
+
+                this.repositoriesGrid.Rows.RemoveAt(currentContextMenuGridItem);
+                NotifierActions.RepoIssues.RemoveAt(currentContextMenuGridItem);
+            }
+            //not sure why the window becomes hidden once a messagebox is shown, but this is a workaround.
+            this.Left = prevX;
+            this.Top = prevY;
+            this.Show();
+        }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -63,6 +114,11 @@ namespace GithubIssueNotifier.Dialogs
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NotifierActions.RefreshIssuesData();
+        }
+
+        private void useAnimationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigWrapper.SetValue(Constants.ConfigKey_UseAnimations, (this.useAnimationsToolStripMenuItem.Checked) ? "1" : "0");
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -90,6 +146,13 @@ namespace GithubIssueNotifier.Dialogs
 
         #region UI interaction
 
+        private void repositoriesGrid_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            this.repositoriesGrid.ClearSelection();
+            this.repositoriesGrid.Rows[e.RowIndex].Selected = true;
+            this.currentContextMenuGridItem = e.RowIndex;
+        }
+
         private void picReload_Click(object sender, EventArgs e)
         {
             NotifierActions.RefreshIssuesData();
@@ -97,12 +160,7 @@ namespace GithubIssueNotifier.Dialogs
 
         private void repositoriesGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string url = NotifierActions.RepoIssues[e.RowIndex].Repo.HtmlUrl;
-            if (!string.IsNullOrWhiteSpace(url))
-            {
-                url += (url.EndsWith("/") ? "" : "/") + "issues";
-                Process.Start(url);
-            }
+            this.GoToRepository(e.RowIndex, true);
         }
 
         private void NotificationsWindow_LostFocus(object sender, EventArgs e)
@@ -113,6 +171,21 @@ namespace GithubIssueNotifier.Dialogs
         private void lnkOpenConfig_Click(object sender, EventArgs e)
         {
             NotifierActions.OpenConfig(true);
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void GoToRepository(int rowIndex, bool toIssuesPage)
+        {
+            string url = NotifierActions.RepoIssues[rowIndex].Repo.HtmlUrl;
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                if(toIssuesPage)
+                    url += (url.EndsWith("/") ? "" : "/") + "issues";
+                Process.Start(url);
+            }
         }
 
         #endregion
@@ -154,9 +227,12 @@ namespace GithubIssueNotifier.Dialogs
 
         private void NotifierActions_Refreshing()
         {
-            this.repositoriesGrid.Rows.Clear();
-            this.loadingPanel.BringToFront();
-            this.loadingPanel.Visible = true;
+            if (ConfigWrapper.GetValue(Constants.ConfigKey_UseAnimations, "1") != "0")
+            {
+                //this.repositoriesGrid.Rows.Clear();
+                this.loadingPanel.BringToFront();
+                this.loadingPanel.Visible = true;
+            }
             this.picReload.Image = Utilities.GetImage(Constants.Img_Reload_Inactive);
             this.picReload.Enabled = false;
             this.lblTotalIssues.Text = "Loading, please wait...";
@@ -164,6 +240,8 @@ namespace GithubIssueNotifier.Dialogs
 
         private void NotifierActions_Refreshed()
         {
+            this.repositoriesGrid.Rows.Clear();
+
             int totalIssueCounter = 0;
             int totalReposWithLateIssues = 0;
             if (NotifierActions.RepoIssues.Count > 0)
@@ -221,5 +299,6 @@ namespace GithubIssueNotifier.Dialogs
 
         private Image imgRepoOK = Utilities.GetImage(Constants.Img_RepoOk);
         private Image imgRepoErr = Utilities.GetImage(Constants.Img_RepoErr);
+        private int currentContextMenuGridItem = -1;
     }
 }

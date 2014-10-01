@@ -12,6 +12,26 @@ namespace GithubIssueNotifier.Wrappers.Configuration
             ConfigWrapper.SetValue(key, String.Join(ConfigWrapper.Delimiter, values.ToArray()));
         }
 
+        public static void AddValueToCollection(string key, string value)
+        {
+            List<string> values = ConfigWrapper.GetValues(key);
+            if (!values.Contains(value))
+            {
+                values.Add(value);
+                ConfigWrapper.SetValues(key, values);
+            }
+        }
+
+        public static void RemoveValueToCollection(string key, string value)
+        {
+            List<string> values = ConfigWrapper.GetValues(key);
+            if (values.Contains(value))
+            {
+                values.Remove(value);
+                ConfigWrapper.SetValues(key, values);
+            }
+        }
+
         public static void SetValue(string key, string value)
         {
             if (ConfigWrapper.SettingsSection.Settings[key] == null)

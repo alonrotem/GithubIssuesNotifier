@@ -308,9 +308,9 @@
             this.label1.ForeColor = System.Drawing.Color.Green;
             this.label1.Location = new System.Drawing.Point(357, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(235, 13);
+            this.label1.Size = new System.Drawing.Size(194, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Add GitHub organizations to be tracked:";
+            this.label1.Text = "These organizations are tracked:";
             // 
             // lblTrackOrganizations
             // 
@@ -422,9 +422,9 @@
             this.label4.ForeColor = System.Drawing.Color.Green;
             this.label4.Location = new System.Drawing.Point(357, 16);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(225, 13);
+            this.label4.Size = new System.Drawing.Size(227, 13);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Add GitHub repositories to be tracked:";
+            this.label4.Text = "These GitHub repositories are tracked:";
             // 
             // label5
             // 
@@ -506,9 +506,9 @@
             this.label7.ForeColor = System.Drawing.Color.Red;
             this.label7.Location = new System.Drawing.Point(360, 17);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(181, 13);
+            this.label7.Size = new System.Drawing.Size(183, 13);
             this.label7.TabIndex = 17;
-            this.label7.Text = "Add repositories to be ignored:";
+            this.label7.Text = "These repositories are ignored:";
             // 
             // lstIgnoredRepositories
             // 
@@ -702,7 +702,7 @@
             this.tableLayoutPanel4.SetColumnSpan(this.chkShowBalloons, 2);
             this.chkShowBalloons.Location = new System.Drawing.Point(3, 89);
             this.chkShowBalloons.Name = "chkShowBalloons";
-            this.chkShowBalloons.Size = new System.Drawing.Size(295, 17);
+            this.chkShowBalloons.Size = new System.Drawing.Size(297, 17);
             this.chkShowBalloons.TabIndex = 3;
             this.chkShowBalloons.Text = "Show Balloon notifications when new results are received";
             this.chkShowBalloons.UseVisualStyleBackColor = true;

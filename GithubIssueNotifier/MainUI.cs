@@ -81,7 +81,6 @@ namespace GithubIssueNotifier
             about.ShowDialog();
         }
 
-
         #endregion
 
         #region Notifier events
@@ -90,8 +89,12 @@ namespace GithubIssueNotifier
         {
             this.isRefreshing = true;
             this.isRefreshed = false;
-            this.notifyIcon.Text = "GitHub Issues Notifier\nScanning...";
-            this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Normal), "***");
+
+            if (ConfigWrapper.GetValue(Constants.ConfigKey_UseAnimations, "1") != "0")
+            {
+                this.notifyIcon.Text = "GitHub Issues Notifier\nScanning...";
+                this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Normal), "***");
+            }
         }
 
         private void NotifierActions_Refreshed()
@@ -137,7 +140,7 @@ namespace GithubIssueNotifier
             }
         }
 
-        private void openNotificationsWindow()
+        internal void openNotificationsWindow()
         {
             if (this.isActiveWindow)
             {

@@ -33,10 +33,6 @@ namespace GithubIssueNotifier.Dialogs
             this.components = new System.ComponentModel.Container();
             this.il = new System.Windows.Forms.ImageList(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.errorPanel = new System.Windows.Forms.Panel();
-            this.lnkOpenConfig = new System.Windows.Forms.LinkLabel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.picError = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +40,7 @@ namespace GithubIssueNotifier.Dialogs
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.useAnimationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readmeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.forkOnGitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,10 +52,16 @@ namespace GithubIssueNotifier.Dialogs
             this.loadingPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.loadingPic = new System.Windows.Forms.PictureBox();
+            this.errorPanel = new System.Windows.Forms.Panel();
+            this.lnkOpenConfig = new System.Windows.Forms.LinkLabel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.picError = new System.Windows.Forms.PictureBox();
             this.reloadTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.contextMenuRepoActions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.goToIssuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.goToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ignoreThisRepositoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
-            this.errorPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picError)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.pnlImmediateActions.SuspendLayout();
@@ -66,6 +69,9 @@ namespace GithubIssueNotifier.Dialogs
             ((System.ComponentModel.ISupportInitialize)(this.repositoriesGrid)).BeginInit();
             this.loadingPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loadingPic)).BeginInit();
+            this.errorPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picError)).BeginInit();
+            this.contextMenuRepoActions.SuspendLayout();
             this.SuspendLayout();
             // 
             // il
@@ -84,49 +90,6 @@ namespace GithubIssueNotifier.Dialogs
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(381, 380);
             this.panel1.TabIndex = 0;
-            // 
-            // errorPanel
-            // 
-            this.errorPanel.BackColor = System.Drawing.Color.White;
-            this.errorPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.errorPanel.Controls.Add(this.lnkOpenConfig);
-            this.errorPanel.Controls.Add(this.label2);
-            this.errorPanel.Controls.Add(this.picError);
-            this.errorPanel.Location = new System.Drawing.Point(2, 24);
-            this.errorPanel.Name = "errorPanel";
-            this.errorPanel.Size = new System.Drawing.Size(381, 332);
-            this.errorPanel.TabIndex = 2;
-            // 
-            // lnkOpenConfig
-            // 
-            this.lnkOpenConfig.AutoSize = true;
-            this.lnkOpenConfig.Location = new System.Drawing.Point(104, 211);
-            this.lnkOpenConfig.Name = "lnkOpenConfig";
-            this.lnkOpenConfig.Size = new System.Drawing.Size(157, 13);
-            this.lnkOpenConfig.TabIndex = 2;
-            this.lnkOpenConfig.TabStop = true;
-            this.lnkOpenConfig.Text = "Open the configuration wizard...";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Gray;
-            this.label2.Location = new System.Drawing.Point(58, 111);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(309, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Failed to load any repository results...";
-            // 
-            // picError
-            // 
-            this.picError.Location = new System.Drawing.Point(14, 58);
-            this.picError.Margin = new System.Windows.Forms.Padding(0);
-            this.picError.Name = "picError";
-            this.picError.Size = new System.Drawing.Size(128, 128);
-            this.picError.TabIndex = 0;
-            this.picError.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
@@ -175,7 +138,8 @@ namespace GithubIssueNotifier.Dialogs
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem,
-            this.refreshToolStripMenuItem});
+            this.refreshToolStripMenuItem,
+            this.useAnimationsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 17);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -183,15 +147,25 @@ namespace GithubIssueNotifier.Dialogs
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.optionsToolStripMenuItem.Text = "&Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.refreshToolStripMenuItem.Text = "&Refresh now";
+            // 
+            // useAnimationsToolStripMenuItem
+            // 
+            this.useAnimationsToolStripMenuItem.Checked = true;
+            this.useAnimationsToolStripMenuItem.CheckOnClick = true;
+            this.useAnimationsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.useAnimationsToolStripMenuItem.Name = "useAnimationsToolStripMenuItem";
+            this.useAnimationsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.useAnimationsToolStripMenuItem.Text = "Show Animations";
+            this.useAnimationsToolStripMenuItem.Click += new System.EventHandler(this.useAnimationsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -299,6 +273,76 @@ namespace GithubIssueNotifier.Dialogs
             this.loadingPic.TabIndex = 0;
             this.loadingPic.TabStop = false;
             // 
+            // errorPanel
+            // 
+            this.errorPanel.BackColor = System.Drawing.Color.White;
+            this.errorPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.errorPanel.Controls.Add(this.lnkOpenConfig);
+            this.errorPanel.Controls.Add(this.label2);
+            this.errorPanel.Controls.Add(this.picError);
+            this.errorPanel.Location = new System.Drawing.Point(2, 24);
+            this.errorPanel.Name = "errorPanel";
+            this.errorPanel.Size = new System.Drawing.Size(381, 332);
+            this.errorPanel.TabIndex = 2;
+            // 
+            // lnkOpenConfig
+            // 
+            this.lnkOpenConfig.AutoSize = true;
+            this.lnkOpenConfig.Location = new System.Drawing.Point(104, 211);
+            this.lnkOpenConfig.Name = "lnkOpenConfig";
+            this.lnkOpenConfig.Size = new System.Drawing.Size(157, 13);
+            this.lnkOpenConfig.TabIndex = 2;
+            this.lnkOpenConfig.TabStop = true;
+            this.lnkOpenConfig.Text = "Open the configuration wizard...";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Gray;
+            this.label2.Location = new System.Drawing.Point(58, 111);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(309, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Failed to load any repository results...";
+            // 
+            // picError
+            // 
+            this.picError.Location = new System.Drawing.Point(14, 58);
+            this.picError.Margin = new System.Windows.Forms.Padding(0);
+            this.picError.Name = "picError";
+            this.picError.Size = new System.Drawing.Size(128, 128);
+            this.picError.TabIndex = 0;
+            this.picError.TabStop = false;
+            // 
+            // contextMenuRepoActions
+            // 
+            this.contextMenuRepoActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.goToIssuesToolStripMenuItem,
+            this.goToToolStripMenuItem,
+            this.ignoreThisRepositoryToolStripMenuItem});
+            this.contextMenuRepoActions.Name = "contextMenuRepoActions";
+            this.contextMenuRepoActions.Size = new System.Drawing.Size(192, 92);
+            // 
+            // goToIssuesToolStripMenuItem
+            // 
+            this.goToIssuesToolStripMenuItem.Name = "goToIssuesToolStripMenuItem";
+            this.goToIssuesToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.goToIssuesToolStripMenuItem.Text = "Navigate to issues";
+            // 
+            // goToToolStripMenuItem
+            // 
+            this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
+            this.goToToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.goToToolStripMenuItem.Text = "Navigate to repository";
+            // 
+            // ignoreThisRepositoryToolStripMenuItem
+            // 
+            this.ignoreThisRepositoryToolStripMenuItem.Name = "ignoreThisRepositoryToolStripMenuItem";
+            this.ignoreThisRepositoryToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.ignoreThisRepositoryToolStripMenuItem.Text = "Ignore this repository";
+            // 
             // NotificationsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -309,9 +353,6 @@ namespace GithubIssueNotifier.Dialogs
             this.Name = "NotificationsWindow";
             this.Text = "GitHub Issues Notifications";
             this.panel1.ResumeLayout(false);
-            this.errorPanel.ResumeLayout(false);
-            this.errorPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picError)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -323,6 +364,10 @@ namespace GithubIssueNotifier.Dialogs
             this.loadingPanel.ResumeLayout(false);
             this.loadingPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loadingPic)).EndInit();
+            this.errorPanel.ResumeLayout(false);
+            this.errorPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picError)).EndInit();
+            this.contextMenuRepoActions.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -354,5 +399,10 @@ namespace GithubIssueNotifier.Dialogs
         private PictureBox picError;
         private Label label2;
         private LinkLabel lnkOpenConfig;
+        private ToolStripMenuItem useAnimationsToolStripMenuItem;
+        private ContextMenuStrip contextMenuRepoActions;
+        private ToolStripMenuItem goToIssuesToolStripMenuItem;
+        private ToolStripMenuItem goToToolStripMenuItem;
+        private ToolStripMenuItem ignoreThisRepositoryToolStripMenuItem;
     }
 }
