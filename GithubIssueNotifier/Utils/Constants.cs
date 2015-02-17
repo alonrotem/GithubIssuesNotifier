@@ -5,10 +5,12 @@ namespace GithubIssueNotifier.Utils
 {
     internal static class Constants
     {
-        public const string Icon_Tray_Normal = @"GithubIssueNotifier.Images.IconTrayNormal.ico";
-        public const string Icon_Tray_Red = @"GithubIssueNotifier.Images.IconTrayRed.ico";
-        public const string Icon_Tray_Pink = @"GithubIssueNotifier.Images.IconTrayPink.ico";
         public const string Icon_Tray_Green = @"GithubIssueNotifier.Images.IconTrayGreen.ico";
+        public const string Icon_Tray_Red = @"GithubIssueNotifier.Images.IconTrayRed.ico";
+        public const string Icon_Tray_Orange = @"GithubIssueNotifier.Images.IconTrayOrange.ico";
+        
+        public const string Icon_Tray_Normal = @"GithubIssueNotifier.Images.IconTrayNormal.ico";
+        public const string Icon_Tray_Pink = @"GithubIssueNotifier.Images.IconTrayPink.ico";
         public const string Img_RepoOk = @"GithubIssueNotifier.Images.Repository_OK_20x20.png";
         public const string Img_RepoErr = @"GithubIssueNotifier.Images.Repository_Error_20x20.png";
         public const string Img_Reload = @"GithubIssueNotifier.Images.Reload.png";

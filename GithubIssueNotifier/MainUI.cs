@@ -93,7 +93,7 @@ namespace GithubIssueNotifier
             if (ConfigWrapper.GetValue(Constants.ConfigKey_UseAnimations, "1") != "0")
             {
                 this.notifyIcon.Text = "GitHub Issues Notifier\nScanning...";
-                this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Normal), "***");
+                this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Orange), "***");
             }
         }
 
@@ -102,7 +102,7 @@ namespace GithubIssueNotifier
             this.isRefreshing = false;
             this.isRefreshed = true;
             if(NotifierActions.TotalIssues > 0)
-                this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Pink), NotifierActions.TotalIssues.ToString());
+                this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Red), NotifierActions.TotalIssues.ToString());
             else
                 this.notifyIcon.Icon = Utilities.GetIcon(Constants.Icon_Tray_Green);
         }
@@ -168,7 +168,7 @@ namespace GithubIssueNotifier
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
             this.notifyIcon.Visible = true;
-            this.notifyIcon.Icon = Utilities.GetIcon(Constants.Icon_Tray_Normal);
+            this.notifyIcon.Icon = Utilities.GetIcon(Constants.Icon_Tray_Orange);
         }
 
         #endregion

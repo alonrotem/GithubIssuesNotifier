@@ -17,7 +17,7 @@ namespace GithubIssueNotifier.Dialogs
             InitializeComponent();
             this.LostFocus += NotificationsWindow_LostFocus;
 
-            this.Icon = Utilities.GetIcon(Constants.Icon_Tray_Normal);
+            this.Icon = Utilities.GetIcon(Constants.Icon_Tray_Orange);
             this.repositoriesGrid.CellClick += repositoriesGrid_CellClick;
             this.picReload.Click += picReload_Click;
             this.picReload.Image = Utilities.GetImage(Constants.Img_Reload);

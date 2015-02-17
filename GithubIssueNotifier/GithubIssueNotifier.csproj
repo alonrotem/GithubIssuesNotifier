@@ -150,6 +150,7 @@
     <EmbeddedResource Include="Images\MenuGoToIssues.png" />
     <EmbeddedResource Include="Images\MenuGoToRepo.png" />
     <EmbeddedResource Include="Images\MenuIgnoreRepo.png" />
+    <EmbeddedResource Include="Images\IconTrayOrange.ico" />
     <Content Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
