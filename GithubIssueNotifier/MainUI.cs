@@ -95,6 +95,8 @@ namespace GithubIssueNotifier
                 this.notifyIcon.Text = "GitHub Issues Notifier\nScanning...";
                 this.notifyIcon.OverlayText(Utilities.GetIcon(Constants.Icon_Tray_Orange), "***");
             }
+            else
+                this.notifyIcon.Icon = Utilities.GetIcon(Constants.Icon_Tray_Orange);
         }
 
         private void NotifierActions_Refreshed()
