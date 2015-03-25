@@ -112,7 +112,8 @@ namespace GithubIssueNotifier.Wrappers.Github
             }
             if ((!err) && (issues.Result != null))
             {
-                return issues.Result.ToList();
+                //Get issues only. Not open pull requests.
+                return issues.Result.Where(issue => issue.PullRequest == null).ToList();
             }
             return new List<Issue>();
         }
