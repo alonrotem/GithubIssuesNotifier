@@ -5,12 +5,12 @@ It runs automatic scheduled scans for open issues in GitHub repositories and/or 
 
 GitHub Issues Notifier uses [OctoKit.NET](https://github.com/octokit/octokit.net) open library to integrate with GitHub's API.
 
-**More info on a post in [my blog, AlonInTheWorld.com](http://www.alonintheworld.com/2014/06/project-keeping-track-of-your-github.html).**   
+**More info on a post in <a href="http://www.alonintheworld.com/2014/06/project-keeping-track-of-your-github.html" target="_blank">my blog, AlonInTheWorld.com</a>.**   
 
 ![About GitHub Issues Notifier](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/AboutDialog.png).
 
 ##Getting the Solution and Building it
-GitHub Issue Notifier's solution references [OctoKit.NET](https://github.com/octokit/octokit.net)'s [Nuget package](http://www.nuget.org/packages/Octokit/). Once the solution is built, OctoKit's package is automatically retrieved and restored as a reference.
+GitHub Issue Notifier's solution references <a href="https://github.com/octokit/octokit.net" target="_blank">OctoKit.NET</a>'s <a href="http://www.nuget.org/packages/Octokit/" target="_blank">Nuget package</a>. Once the solution is built, OctoKit's package is automatically retrieved and restored as a reference.
 ##Initial Configuration
 When opened for the first time, the setup wizard opens and presents 3 tabs for settings.
 
@@ -57,7 +57,7 @@ Once your settings are saved and GitHub Issues Notifier is active, an icon will 
 ![Scanning...](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_Scanning.png)   
 ![Tooltip with results](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_TooltipFull.png)
 
-If baloon notifications are active, when scanning is complete with new results, a notification baloon will appear.
+If baloon notifications are active, when scanning is complete with new results, a notification baloon will appear.   
 ![Baloon notifications](https://raw.githubusercontent.com/alonrotem/GithubIssuesNotifier/master/Screenshots/Systray_Baloon.png)
 
 The notification icon will now also show the total number of open issues detected in the last scan.
